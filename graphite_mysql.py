@@ -10,6 +10,6 @@ def get_num_queries(cur):
 	cur.execute('show status where Variable_name="Queries"')
 	return long(cur.fetchone()[1])
 
-def send_to_graphite(graphite_host="localhost", graphite_port=2003, graphite_base_string, value):
+def send_to_graphite(graphite_host, graphite_port, graphite_base_string, value):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	sock.sendto("%s %f %d" % (graphite_base_string, value, int(time.time())), (graphite_host, graphite_port))
